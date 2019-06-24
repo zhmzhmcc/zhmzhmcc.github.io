@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>模态框弹出层</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			background:url(images/3.jpg) ;
+			background-size: 100%;
+		}
+		.box1{
+			padding-top: 20px;
+			text-align: center;
+		}
+		.box1 a:link,.box1 a:visited{
+			text-decoration: none;
+			color:#000;
+			font-size: 20px;
+		}
+		.mask{
+
+
+			height: 500px;
+			background: #fff;
+			position: fixed;
+			top: 25%;
+			left: 35%;
+			margin: -125px 0 0 -200px;
+			z-index: 3;
+			display: none;
+			border-radius: 10px;
+			opacity: 0.9;
+
+		}
+		.mask p{
+			position: absolute;
+		}
+		.small-box{
+			width:500px;
+			height: 400px;
+			background: white;
+			z-index:1000;
+			position: fixed;
+			top:40%;
+			left:43%;
+			margin:-125px 0 0 -150px;
+			display: none;
+
+		}
+		.small-box .zhuce{
+			cursor: pointer;
+		}
+
+		.small-box-zhuce{
+			width:500px;
+			height: 400px;
+			background: white;
+			z-index:1000;
+			position: fixed;
+			top:50%;
+			left:50%;
+			margin:-125px 0 0 -150px;
+			display: none;
+
+
+		}
+
+		.small-box span{
+			position: absolute;
+			top:10px;
+			right: 10px;
+			width:15px;
+			height: 15px;
+			font-size: 15px;
+			cursor: pointer;
+
+		}
+		.small-box .yonghu{
+			font-size: 20px;
+			font-weight: bold;
+			height: 50px;
+
+		}
+		.small-box input{
+			width:200px;
+			height: 25px;
+
+		}
+		.small-box-zhuce span{
+			position: absolute;
+			top:10px;
+			right: 10px;
+			width:15px;
+			height: 15px;
+			font-size: 15px;
+			cursor: pointer;
+
+		}
+		.small-box-zhuce .yonghu{
+			font-size: 20px;
+			font-weight: bold;}
+
+
+	</style>
+	<script type="text/javascript">
+		window.onload=function () {
+			var inin=document.getElementById('inin');
+			var out=document.getElementById('out');
+			var mask=document.getElementById('mask');
+			var small=document.getElementById('small');
+			var close=document.getElementById('close');
+			inin.onclick=function(){
+				mask.style.display="block";
+				small.style.display="block";
+
+			};
+			close.onclick=function(){
+				mask.style.display="none";
+				small.style.display="none";
+			};
+			var zhuce=document.getElementById('zhuce');
+			var small_zhuce=document.getElementById('small_zhuce');
+			var close1=document.getElementById('close1');
+			zhuce.onclick=function(){
+				small_zhuce.style.display="block";
+				small.style.display="none";
+			};
+			close1.onclick=function(){
+				small_zhuce.style.display="none";
+				mask.style.display="none";
+			};
+			var out=document.getElementById('out');
+			out.onclick=function(){
+				small_zhuce.style.display="block";
+				mask.style.display="block";
+			};
+			var inputs=document.getElementsByTagName('input');
+			var btn=document.getElementsByTagName('button');
+			btn[0].onclick=function(){
+				if(inputs[0].value=="")
+					inputs[0].innerHTML="请输入姓名"
+			};
+		small.onmousedown=function(event){
+		var event=event||window.event;
+		var x=event.clientX-small.offsetLeft-150;
+			var y=event.clientY-small.offsetLeft-125;
+		//alert(x);
+			window.onmousemove=function(event){
+				var event=event||window.event;
+				small.style.left=event.clientX-x+"px";
+				small.style.top=event.clientY-y+"px";
+			}
+
+	};
+			window.onmouseup=function(){
+				window.onmousemove=null;
+			}
+
+
+		}
+	</script>
+</head>
+<body>
+<div class="mask" id="mask" >
+
+</div>
+<div class="small-box" id="small" style="display: block;">
+	<form>
+		<table width="300" height="300" align="center" cellspacing="10" cellpadding="3" align="center">
+			<tr>
+				<td colspan="2" class="yonghu"><p>用户登录</p></td>
+			</tr>
+			<tr>
+				<td>姓名:</td>
+				<td>
+					<input type="text" name=""
+							>
+				</td>
+			</tr>
+			<tr>
+				<td>密码:</td>
+				<td>
+					<input type="text" name="" size="30">
+				</td>
+
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button style="width: 80px;height:30px ">登录</button>
+				</td>
+
+
+			</tr>
+			<tr>
+				<td colspan="2" class="zhuce" id="zhuce">
+					没有账号，注册一个</td>
+			</tr>
+		</table>
+	</form>
+
+	<span id="close">x</span>
+</div>
+<div class="small-box-zhuce" id="small_zhuce">
+	<form class="one">
+		<table width="300" height="300" align="center" cellspacing="10" cellpadding="3" align="center">
+			<tr>
+				<td colspan="2" class="yonghu"><p>用户注册</p></td>
+			</tr>
+			<tr>
+				<td>姓名:</td>
+				<td>
+					<input type="text" name=""
+						   size="30" height="10">
+				</td>
+			</tr>
+			<tr>
+				<td>密码:</td>
+				<td>
+					<input type="text" name="" size="30">
+				</td>
+
+			</tr>
+			<tr>
+				<td>确认密码:</td>
+				<td>
+					<input type="text" name="" size="30">
+				</td>
+
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button style="width: 80px;height:30px ">注册</button>
+				</td>
+
+
+			</tr>
+
+		</table>
+	</form>
+
+	<span id="close1">x</span>
+</div>
+<div class="container">
+	<div class="box1">
+		<p><a href="javascript:;" id="inin">请登录</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="javascript:;" id="out">注册</a></p>
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+
+</script>
